@@ -1,6 +1,6 @@
 {
   "name": "mcfly",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Flux architecture made easy",
   "keywords": [
     "flux",
@@ -14,10 +14,16 @@
   ],
   "main": "index.js",
   "author": "Ken Wheeler",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kenwheeler/mcfly"
+  },
+  "bugs": "https://github.com/kenwheeler/mcfly/issues",
   "license": "BSD",
   "devDependencies": {
     "browserify": "^5.9.1",
     "del": "^0.1.2",
+    "flux": "^2.0.1",
     "gulp": "^3.8.6",
     "gulp-react": "^0.5.0",
     "gulp-replace": "^0.4.0",
