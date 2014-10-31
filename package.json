@@ -1,0 +1,27 @@
+{
+  "name": "mcfly",
+  "version": "0.0.1",
+  "description": "Flux architecture made easy",
+  "keywords": [
+    "flux",
+    "react",
+    "mcfly"
+  ],
+  "files": [
+    "index.js",
+    "lib/",
+    "LICENSE"
+  ],
+  "main": "index.js",
+  "author": "Ken Wheeler",
+  "license": "BSD",
+  "devDependencies": {
+    "browserify": "^5.9.1",
+    "del": "^0.1.2",
+    "gulp": "^3.8.6",
+    "gulp-react": "^0.5.0",
+    "gulp-replace": "^0.4.0",
+    "underscore": "^1.7.0",
+    "vinyl-source-stream": "^0.1.1"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "mcfly",
+  "description": "Flux architecture made easy",
+  "version": "0.0.1",
+  "main": "dist/McFly.js",
+  "license": "https://github.com/kenwheeler/mcfly/blob/master/LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kenwheeler/mcfly.git"
+  },
+  "author": "ken Wheeler",
+  "keywords": [
+    "flux",
+    "react",
+    "mcfly"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "lib",
+    "Gulpfile.js",
+    "index.js",
+    "package.json"
+  ]
+}
