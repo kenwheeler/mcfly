@@ -1,4 +1,4 @@
-var AppController = require('../controller/AppController');
+var mcFly = require('../flux/mcFly');
 
 var _count = 0;
 
@@ -6,7 +6,7 @@ function countOne(text) {
   _count++;
 }
 
-var CounterStore = AppController.createStore({
+var CounterStore = mcFly.createStore({
 
   getCount: function() {
     return _count;

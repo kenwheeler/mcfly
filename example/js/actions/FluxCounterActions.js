@@ -1,6 +1,6 @@
-var AppController = require('../controller/AppController');
+var mcFly = require('../flux/mcFly');
 
-var FluxCounterActions = AppController.createActions({
+var FluxCounterActions = mcFly.createActions({
   countOne: function() {
     return {
       actionType: 'COUNT_ONE'

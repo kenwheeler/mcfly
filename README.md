@@ -17,17 +17,17 @@ Check out this JSFiddle Demo to see how McFly can work for you:
 
 McFly uses Facebook Flux's dispatcher. When McFly is instantiated, and a single dispatcher instance is created and can be accessed like shown below:
 
-	var AppController = new McFly();
-	
-	return AppController.dispatcher;
-	
+	var mcFly = new McFly();
+
+	return mcFly.dispatcher;
+
 In fact, all created Actions & Stores are also stored on the McFly object as `actions` and `stores` respectively.
 
 ###Stores
 
 McFly has a **createStore** helper method that creates an instance of a Store. Store instances have been merged with EventEmitter and come with **emitChange**, **addChangeListener** and **removeChangeListener** methods built in.
 
-When a store is created, its methods parameter specified what public methods should be added to the Store object. Every store is automatically registered with the Dispatcher and the `dispatchID` is stored on the Store object itself, for use in `waitFor` methods. 
+When a store is created, its methods parameter specified what public methods should be added to the Store object. Every store is automatically registered with the Dispatcher and the `dispatchID` is stored on the Store object itself, for use in `waitFor` methods.
 
 Creating a store with McFly looks like this:
 
@@ -37,7 +37,7 @@ Creating a store with McFly looks like this:
 	  _todos.push(text);
 	}
 
-	var TodoStore = AppController.createStore({
+	var TodoStore = mcFly.createStore({
 
 	  getTodos: function() {
 	    return _todos;
@@ -68,18 +68,18 @@ Adding Store eventing to your component is as easy as:
 	var TodoApp = React.createClass({
 
 	  mixins: [TodoStore.mixin],
-	  
+
 	  ...
 
 ###Actions
 
-McFly's **createActions** method creates an Action Creator object with the supplied singleton object. The supplied methods are inserted into a Dispatcher.dispatch call and returned with their original name, so that when you call these methods, the dispatch takes place automatically. 
+McFly's **createActions** method creates an Action Creator object with the supplied singleton object. The supplied methods are inserted into a Dispatcher.dispatch call and returned with their original name, so that when you call these methods, the dispatch takes place automatically.
 
 Adding actions to your app looks like this:
 
-	var AppController = require('../controller/AppController');
+	var mcFly = require('../controller/mcFly');
 
-	var TodoActions = AppController.createActions({
+	var TodoActions = mcFly.createActions({
 	  addTodo: function(text) {
 	    return {
 	      actionType: 'ADD_TODO',
@@ -94,7 +94,7 @@ Adding actions to your app looks like this:
 
 	var McFly = require('mcfly');
 
-	var AppController = new McFly();
+	var mcFly = new McFly();
 
 
 ### createStore
@@ -103,7 +103,7 @@ Adding actions to your app looks like this:
 	 * @param {function} callback - Callback method for Dispatcher dispatches
 	 * @return {object} - Returns instance of Store
 	 */
-	
+
 ### createActions
 
     /**
