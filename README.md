@@ -7,6 +7,12 @@ When writing ReactJS apps, it is enormously helpful to use Facebook's Flux archi
 
 McFly is a library that provides all 3 components of Flux architecture, using Facebook's Dispatcher, and providing factories for Actions & Stores.
 
+###Demo
+
+Check out this JSFiddle Demo to see how McFly can work for you:
+
+[http://jsfiddle.net/6rauuetb/](http://jsfiddle.net/6rauuetb/)
+
 ###Dispatcher
 
 McFly uses Facebook Flux's dispatcher. When McFly is instantiated, and a single dispatcher instance is created and can be accessed like shown below:
