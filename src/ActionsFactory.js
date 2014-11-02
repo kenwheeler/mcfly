@@ -1,5 +1,5 @@
 var Action = require('./Action');
-var _ = require('underscore');
+var assign = require('object-assign');
 
 /**
  * ActionsFactory class
@@ -21,7 +21,7 @@ class ActionsFactory {
         _actions[a] = action.dispatch.bind(action);
       }
     }
-    _.extend(this, _actions);
+    assign(this, _actions);
   }
 }
 

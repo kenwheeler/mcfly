@@ -1,6 +1,6 @@
 var EventEmitter = require('events').EventEmitter;
 var Dispatcher = require('./Dispatcher');
-var _ = require('underscore');
+var assign = require('object-assign');
 
 /**
  * Store class
@@ -18,8 +18,7 @@ class Store {
   constructor(methods, callback) {
     var self = this;
     this.callback = callback;
-    _.extend(this, EventEmitter.prototype);
-    _.extend(this, methods);
+    assign(this, EventEmitter.prototype, methods);
     this.mixin = {
       componentDidMount: function() {
         self.addChangeListener(this.onChange);

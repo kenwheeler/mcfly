@@ -1,7 +1,7 @@
 var Dispatcher = require('./Dispatcher');
 var Store = require('./Store');
 var ActionsFactory = require('./ActionsFactory');
-var _ = require('underscore')
+var assign = require('object-assign');
 
 /**
  * Main McFly Class
@@ -44,7 +44,7 @@ class McFly {
    */
   createActions(actions) {
     var actionFactory = new ActionsFactory(actions);
-    _.extend(this.actions,actionFactory);
+    assign(this.actions,actionFactory);
     return actionFactory;
   }
 
