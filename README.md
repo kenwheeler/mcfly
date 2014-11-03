@@ -53,7 +53,7 @@ Creating a store with McFly looks like this:
 	      return true;
 	  }
 
-	  TodoStore();
+	  TodoStore.emitChange();
 
 	  return true;
 
