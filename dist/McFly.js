@@ -21,11 +21,11 @@ var Dispatcher = require('./Dispatcher');
   /**
    * Calls callback method from Dispatcher
    *
-   * @param {object} payload - Data argument for callback method
+   * @param {...*} arguments - arguments for callback method
    * @constructor
    */
-  Action.prototype.dispatch=function(payload) {"use strict";
-    Dispatcher.dispatch(this.callback(payload));
+  Action.prototype.dispatch=function() {"use strict";
+    Dispatcher.dispatch(this.callback.apply(this, arguments));
   };
 
 

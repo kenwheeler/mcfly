@@ -1,7 +1,7 @@
 {
   "name": "mcfly",
   "description": "Flux architecture made easy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/McFly.js",
   "license": "https://github.com/kenwheeler/mcfly/blob/master/LICENSE",
   "repository": {
