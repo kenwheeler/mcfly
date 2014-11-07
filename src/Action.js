@@ -18,11 +18,11 @@ class Action {
   /**
    * Calls callback method from Dispatcher
    *
-   * @param {object} payload - Data argument for callback method
+   * @param {...*} arguments - arguments for callback method
    * @constructor
    */
-  dispatch(payload) {
-    Dispatcher.dispatch(this.callback(payload));
+  dispatch() {
+    Dispatcher.dispatch(this.callback.apply(this, arguments));
   }
 }
 
