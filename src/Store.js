@@ -1,6 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 var Dispatcher = require('./Dispatcher');
 var assign = require('object-assign');
+var invariant = require('invariant');
 
 /**
  * Store class
@@ -18,6 +19,8 @@ class Store {
   constructor(methods, callback) {
     var self = this;
     this.callback = callback;
+    invariant(!methods.callback, '"callback" is a reserved name and cannot be used as a method name.');
+    invariant(!methods.mixin,'"mixin" is a reserved name and cannot be used as a method name.');
     assign(this, EventEmitter.prototype, methods);
     this.mixin = {
       componentDidMount: function() {
@@ -27,6 +30,13 @@ class Store {
         self.removeChangeListener(this.onChange);
       }
     }
+  }
+
+  /**
+   * Returns dispatch token
+   */
+  getDispatchToken() {
+    return this.dispatcherID;
   }
 
   /**
