@@ -20,8 +20,16 @@
   },
   "bugs": "https://github.com/kenwheeler/mcfly/issues",
   "license": "BSD",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "rootDir": "src",
+    "scriptPreprocessor": "../jest-preprocessor.js"
+  },
   "dependencies": {
     "flux": "^2.0.1",
+    "invariant": "^1.0.2",
     "object-assign": "^1.0.0"
   },
   "devDependencies": {
@@ -30,6 +38,8 @@
     "gulp": "^3.8.6",
     "gulp-react": "^0.5.0",
     "gulp-replace": "^0.4.0",
+    "jest-cli": "^0.1.18",
+    "react-tools": "^0.12.0",
     "vinyl-source-stream": "^0.1.1"
   }
 }
