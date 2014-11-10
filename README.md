@@ -66,11 +66,16 @@ Use `Dispatcher.waitFor` if you need to ensure handlers from other stores run fi
 	var OtherStore = require('../stores/OtherStore');
 	var _todos = [];
 
+	function addTodo(text, someValue) {
+	  _todos.push({ text: text, someValue: someValue });
+	}
+
 	  ...
 
 	    case 'ADD_TODO':
 	      Dispatcher.waitFor([OtherStore.dispatcherID]);
-	      addTodo(payload.text);
+	      var someValue = OtherStore.getSomeValue();
+	      addTodo(payload.text, someValue);
 	      break;
 
 	  ...
