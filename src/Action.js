@@ -25,9 +25,7 @@ class Action {
    */
   dispatch() {
     var payload = this.callback.apply(this, arguments);
-    if (payload) {
-      invariant(payload.actionType, "Payload object requires an actionType property");
-    }
+    payload && invariant(payload.actionType, "Payload object requires an actionType property");
     return new Promise(function(resolve, reject){
       if ( !payload ) {
         return reject();
