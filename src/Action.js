@@ -21,15 +21,17 @@ class Action {
    * Calls callback method from Dispatcher
    *
    * @param {...*} arguments - arguments for callback method
-   * @constructor
+   * @returns Promise object
    */
   dispatch() {
     var payload = this.callback.apply(this, arguments);
+    if (payload) {
+      invariant(payload.actionType, "Payload object requires an actionType property");
+    }
     return new Promise(function(resolve, reject){
       if ( !payload ) {
         return reject();
       }
-      invariant(payload.actionType, "Payload object requires an actionType property");
       Dispatcher.dispatch(payload);
       resolve();
     });
