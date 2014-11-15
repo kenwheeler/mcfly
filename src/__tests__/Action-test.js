@@ -22,7 +22,7 @@ describe('Action', function() {
 
   });
 
-  it('should throw if actionType isn\'t supplied', function(){
+  pit('should reject if actionType isn\'t supplied', function(){
 
     callback = function(argument) {
       return{
@@ -30,15 +30,14 @@ describe('Action', function() {
       };
     };
 
-    mockAction = new Action(callback);
-
-    expect(function() {
-      mockAction.dispatch("test");
-    }).toThrow();
+    return (new Action(callback)).dispatch("test")["catch"](
+      function(error){
+        expect(error).toBeTruthy();
+      });
 
   });
 
-  it('should not throw if actionType IS supplied', function(){
+  pit('should resolve if actionType IS supplied', function(){
 
     callback = function(argument) {
       return{
@@ -47,11 +46,10 @@ describe('Action', function() {
       };
     };
 
-    mockAction = new Action(callback);
-
-    expect(function() {
-      mockAction.dispatch("test");
-    }).not.toThrow();
+    return (new Action(callback)).dispatch("test").then(
+      function(success){
+        expect(success).toBeUndefined();
+      });
 
   });
 

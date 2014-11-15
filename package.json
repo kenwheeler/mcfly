@@ -28,6 +28,7 @@
     "scriptPreprocessor": "../jest-preprocessor.js"
   },
   "dependencies": {
+    "es6-promise": "^2.0.0",
     "flux": "^2.0.1",
     "invariant": "^1.0.2",
     "object-assign": "^1.0.0"

@@ -1,5 +1,6 @@
 var Dispatcher = require('./Dispatcher');
 var invariant = require('invariant');
+var Promise = require('es6-promise').Promise;
 
 /**
  * Action class
@@ -24,8 +25,14 @@ class Action {
    */
   dispatch() {
     var payload = this.callback.apply(this, arguments);
-    invariant(payload.actionType, "Payload object requires an actionType property");
-    Dispatcher.dispatch(payload);
+    return new Promise(function(resolve, reject){
+      if ( !payload ) {
+        return reject();
+      }
+      invariant(payload.actionType, "Payload object requires an actionType property");
+      Dispatcher.dispatch(payload);
+      resolve();
+    });
   }
 }
 
