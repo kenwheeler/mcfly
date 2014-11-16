@@ -2,7 +2,6 @@
 module.exports = require('./lib/McFly');
 },{"./lib/McFly":5}],2:[function(require,module,exports){
 var Dispatcher = require('./Dispatcher');
-// var invariant = require('invariant');
 var Promise = require('es6-promise').Promise;
 
 
@@ -141,7 +140,6 @@ var assign = require('object-assign');
 module.exports = McFly;
 },{"./ActionsFactory":3,"./Dispatcher":4,"./Store":6,"object-assign":14}],6:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter;
-var Dispatcher = require('./Dispatcher');
 var assign = require('object-assign');
 var invariant = require('invariant');
 
@@ -209,7 +207,7 @@ var invariant = require('invariant');
 
 
 module.exports = Store;
-},{"./Dispatcher":4,"events":7,"invariant":13,"object-assign":14}],7:[function(require,module,exports){
+},{"events":7,"invariant":13,"object-assign":14}],7:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
