@@ -1,5 +1,4 @@
 var EventEmitter = require('events').EventEmitter;
-var Dispatcher = require('./Dispatcher');
 var assign = require('object-assign');
 var invariant = require('invariant');
 

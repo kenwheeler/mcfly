@@ -1,5 +1,4 @@
 var Dispatcher = require('./Dispatcher');
-// var invariant = require('invariant');
 var Promise = require('es6-promise').Promise;
 
 
