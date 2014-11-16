@@ -2,8 +2,14 @@
 module.exports = require('./lib/McFly');
 },{"./lib/McFly":5}],2:[function(require,module,exports){
 var Dispatcher = require('./Dispatcher');
-var invariant = require('invariant');
+// var invariant = require('invariant');
 var Promise = require('es6-promise').Promise;
+
+
+function reThrow(reject, error) {
+  setTimeout(function(){ throw error; }, 0);
+  return reject();
+}
 
 /**
  * Action class
@@ -27,21 +33,23 @@ var Promise = require('es6-promise').Promise;
    * @returns Promise object
    */
   Action.prototype.dispatch=function() {"use strict";
-    var payload = this.callback.apply(this, arguments);
-    payload && invariant(payload.actionType, "Payload object requires an actionType property");
-    return new Promise(function(resolve, reject){
-      if ( !payload ) {
-        return reject();
-      }
-      Dispatcher.dispatch(payload);
-      resolve();
-    });
+    return Promise.resolve(this.callback.apply(this, arguments))
+      .then(function(payload){
+        return new Promise(function(resolve, reject){
+          if (!payload) return reject();
+          if (!payload.actionType) return reThrow(reject,
+            "Payload object requires an actionType property"
+          );
+          Dispatcher.dispatch(payload)
+          resolve();
+        });
+      });
   };
 
 
 module.exports = Action;
 
-},{"./Dispatcher":4,"es6-promise":9,"invariant":13}],3:[function(require,module,exports){
+},{"./Dispatcher":4,"es6-promise":9}],3:[function(require,module,exports){
 var Action = require('./Action');
 var assign = require('object-assign');
 

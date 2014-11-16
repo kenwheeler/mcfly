@@ -34,6 +34,7 @@ describe('Action', function() {
 
     expect(function() {
       mockAction.dispatch("test");
+      jest.runAllTimers();
     }).toThrow();
 
   });
@@ -51,6 +52,7 @@ describe('Action', function() {
 
     expect(function() {
       mockAction.dispatch("test");
+      jest.runAllTimers();
     }).not.toThrow();
 
   });
