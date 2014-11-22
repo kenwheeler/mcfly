@@ -34,6 +34,7 @@ describe('Action', function() {
 
     expect(function() {
       mockAction.dispatch("test");
+      jest.runAllTimers();
     }).toThrow();
 
   });
@@ -51,13 +52,43 @@ describe('Action', function() {
 
     expect(function() {
       mockAction.dispatch("test");
+      jest.runAllTimers();
     }).not.toThrow();
+
+  });
+
+  pit('should reject if returns falsy value', function(){
+
+    callback = function(argument) {
+      return false;
+    };
+
+    return (new Action(callback)).dispatch("test")["catch"](
+      function(error){
+        expect(error).toBeUndefined();
+      });
+
+  });
+
+  pit('should resolve if actionType IS supplied', function(){
+
+    callback = function(argument) {
+      return{
+        actionType: 'TEST_ACTION',
+        test: argument
+      };
+    };
+
+    return (new Action(callback)).dispatch("test").then(
+      function(success){
+        expect(success).toBeUndefined();
+      });
 
   });
 
   it('should have dispatched the supplied payload', function(){
 
-      expect(Dispatcher.dispatch.mock.calls.length).toEqual(1);
+      expect(Dispatcher.dispatch.mock.calls.length).toEqual(2);
 
   });
 
