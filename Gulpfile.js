@@ -20,7 +20,7 @@ gulp.task('lib', function() {
 
 });
 
-gulp.task('browserify', function() {
+gulp.task('browserify', ['lib'], function() {
   return browserify(browserifyConfig)
           .bundle()
           .pipe(source('McFly.js'))
