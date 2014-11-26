@@ -90,6 +90,10 @@ Adding actions to your app looks like this:
 
 All actions methods return promise objects so that components can respond to long functions. The promise will be resolved with no parameters as information should travel through the dispatcher and stores. To reject the promise, return a falsy value from the action's method. The dispatcher will not be called if the returned value is falsy or has no actionType.
 
+You can see an example of how to use this functionality here:
+
+http://jsfiddle.net/thekenwheeler/32hgqsxt/
+
 ## API
 
 ###McFly
