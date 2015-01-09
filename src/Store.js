@@ -1,3 +1,5 @@
+'use strict';
+
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var invariant = require('invariant');
