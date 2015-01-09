@@ -23,10 +23,17 @@ class Store {
     assign(this, EventEmitter.prototype, methods);
     this.mixin = {
       componentDidMount: function() {
-        self.addChangeListener(this.onChange);
+        var warn = (console.warn || console.log).bind(console);
+        if(!this.storeDidChange){
+            warn("A component that uses a McFly Store mixin is not implementing\
+                  storeDidChange. onChange will be called instead, but this will\
+                  no longer be supported from version 1.0.");
+        }
+
+        self.addChangeListener(this.storeDidChange || this.onChange);
       },
       componentWillUnmount: function() {
-        self.removeChangeListener(this.onChange);
+        self.removeChangeListener(this.storeDidChange || this.onChange);
       }
     }
   }
