@@ -85,7 +85,7 @@ function addTodo(text, someValue) {
  ...
 ```
 
-Stores are also created a with a ReactJS component mixin that adds and removes store listeners that call an **onChange** component method.
+Stores are also created a with a ReactJS component mixin that adds and removes store listeners that call an **storeDidChange** component method.
 
 Adding Store eventing to your component is as easy as:
 
