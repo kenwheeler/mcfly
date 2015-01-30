@@ -2,7 +2,7 @@
 
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-var invariant = require('invariant');
+var iv = require('invariant');
 
 /**
  * Store class
@@ -20,8 +20,8 @@ class Store {
   constructor(methods, callback) {
     var self = this;
     this.callback = callback;
-    invariant(!methods.callback, '"callback" is a reserved name and cannot be used as a method name.');
-    invariant(!methods.mixin,'"mixin" is a reserved name and cannot be used as a method name.');
+    iv(!methods.callback, '"callback" is a reserved name and cannot be used as a method name.');
+    iv(!methods.mixin,'"mixin" is a reserved name and cannot be used as a method name.');
     assign(this, EventEmitter.prototype, methods);
     this.mixin = {
       componentDidMount: function() {
