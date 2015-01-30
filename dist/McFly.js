@@ -6,7 +6,11 @@ var Promise = require('es6-promise').Promise;
 
 
 function reThrow(reject, error) {
-  setTimeout(function(){ throw error; }, 0);
+  setTimeout(function(){ 
+      if (error && error.stack) {
+          console.error(error.stack);
+      }
+      throw error; }, 0);
   return reject();
 }
 
@@ -39,7 +43,13 @@ function reThrow(reject, error) {
           if (!payload.actionType) return reThrow(reject,
             "Payload object requires an actionType property"
           );
-          Dispatcher.dispatch(payload)
+
+          try {
+            Dispatcher.dispatch(payload);
+          } catch (error) {
+            reThrow(reject, error); 
+          }
+
           resolve();
         });
       });
@@ -164,10 +174,21 @@ var invariant = require('invariant');
     assign(this, EventEmitter.prototype, methods);
     this.mixin = {
       componentDidMount: function() {
-        self.addChangeListener(this.onChange);
+        var warn = (console.warn || console.log).bind(console);
+        if(!this.storeDidChange){
+            warn("A component that uses a McFly Store mixin is not implementing\
+                  storeDidChange. onChange will be called instead, but this will\
+                  no longer be supported from version 1.0.");
+        }
+        this.listener = this.storeDidChange || this.onChange;
+        if(!this.listener){
+            warn("A change handler is missing from a component with a McFly mixin.\
+                  Notifications from Stores are not being handled.");
+        }
+        this.listener && self.addChangeListener(this.listener);
       },
       componentWillUnmount: function() {
-        self.removeChangeListener(this.onChange);
+        this.listener && self.removeChangeListener(this.listener);
       }
     }
   }
