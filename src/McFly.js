@@ -1,3 +1,5 @@
+'use strict';
+
 var Dispatcher = require('./Dispatcher');
 var Store = require('./Store');
 var ActionsFactory = require('./ActionsFactory');

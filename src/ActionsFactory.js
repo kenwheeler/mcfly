@@ -1,3 +1,5 @@
+'use strict';
+
 var Action = require('./Action');
 var assign = require('object-assign');
 
