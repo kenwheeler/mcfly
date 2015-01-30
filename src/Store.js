@@ -33,7 +33,7 @@ class Store {
         if(!this.listener){
             warn("A change handler is missing from a component with a McFly mixin. Notifications from Stores are not being handled.");
         }
-        this.listener && self.addChangeListener(this.listener);
+        this.listener && self.addChangeListener(()=>( this._lifeCycleState != "UNMOUNTED" ) && this.listener());
       },
       componentWillUnmount: function() {
         this.listener && self.removeChangeListener(this.listener);
