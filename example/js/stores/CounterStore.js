@@ -13,18 +13,18 @@ var CounterStore = mcFly.createStore({
   }
 
 }, function(payload){
+  var needsUpdate = false;
 
   switch(payload.actionType) {
     case 'COUNT_ONE':
       countOne();
-    break;
-    default:
-      return true;
+      needsUpdate = true;
+      break;
   }
 
-  CounterStore.emitChange();
-
-  return true;
+  if (needsUpdate) {
+    CounterStore.emitChange();
+  }
 
 });
 

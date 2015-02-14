@@ -46,18 +46,18 @@ getTodos: function() {
 }
 
 }, function(payload){
+  var needsUpdate = false;
 
   switch(payload.actionType) {
   case 'ADD_TODO':
     addTodo(payload.text);
-  break;
-  default:
-    return true;
+    needsUpdate = true;
+    break;
   }
 
-  TodoStore.emitChange();
-
-  return true;
+  if (needsUpdate) {
+    TodoStore.emitChange();
+  }
 
 });
 ```
