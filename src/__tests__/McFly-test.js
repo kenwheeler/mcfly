@@ -13,7 +13,20 @@ describe('McFly', function() {
   var ActionsFactory = require('../ActionsFactory');
   var mcFly,mockStore,mockActionsFactory;
 
-  mcFly = new McFly();
+  beforeEach(function() {
+
+    mcFly = new McFly();
+    mockStore = mcFly.createStore({testMethod: function(){}}, function(){});
+    mockActionsFactory = mcFly.createActions({
+      testMethod: function(test) {
+        return {
+          actionType: 'TEST_ADD',
+          data: test
+        }
+      }
+    });
+
+  });
 
   it('should instantiate a new dispatcher and attach it to the new instance', function() {
 
@@ -22,8 +35,6 @@ describe('McFly', function() {
   });
 
   it('should create a new Store when createStore is called', function() {
-
-    mockStore = mcFly.createStore({testMethod: function(){}}, function(){});
 
     expect(mockStore instanceof Store).toEqual(true);
 
@@ -37,20 +48,11 @@ describe('McFly', function() {
 
   it('should register created Stores with the Dispatcher and store the token', function() {
 
-    expect(mockStore.getDispatchToken()).toEqual("ID_1");
+    expect(mockStore.getDispatchToken()).toMatch(/ID_\d+/);
 
   });
 
   it('should create a new ActionsFactory when createActions is called', function() {
-
-    mockActionsFactory = mcFly.createActions({
-      testMethod: function(test) {
-        return {
-          actionType: 'TEST_ADD',
-          data: test
-        }
-      }
-    });
 
     expect(mockActionsFactory instanceof ActionsFactory).toEqual(true);
 
