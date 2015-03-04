@@ -11,17 +11,47 @@ describe('McFly', function() {
   var McFly = require('../McFly');
   var Store = require('../Store');
   var ActionsFactory = require('../ActionsFactory');
-  var mcFly,mockStore,mockActionsFactory;
+  var TestConstants = {
+    TEST_ADD: 'TEST_ADD',
+    TEST_REMOVE: 'TEST_REMOVE'
+  };
+
+  var mcFly,mockStore,mockActionsFactory,testItems;
 
   beforeEach(function() {
 
     mcFly = new McFly();
-    mockStore = mcFly.createStore({testMethod: function(){}}, function(){});
+
+    var items = [];
+    mockStore = mcFly.createStore(
+    {
+      getItems: function() {
+        return items;
+      }
+    }, function(payload) {
+      switch(payload.actionType) {
+        case TestConstants.TEST_ADD:
+          items.push(payload.item);
+        break;
+        case TestConstants.TEST_REMOVE:
+          items.splice(items.indexOf(payload.item), 1);
+        break;
+        default:
+          return true;
+      }
+    });
+
     mockActionsFactory = mcFly.createActions({
-      testMethod: function(test) {
+      add: function(item) {
         return {
-          actionType: 'TEST_ADD',
-          data: test
+          actionType: TestConstants.TEST_ADD,
+          item: item
+        }
+      },
+      remove: function(item) {
+        return {
+          actionType: TestConstants.TEST_REMOVE,
+          item: item
         }
       }
     });
@@ -60,7 +90,7 @@ describe('McFly', function() {
 
   it('should store created ActionsFactory methods in an actions property', function() {
 
-    expect("testMethod" in mcFly.actions).toEqual(true);
+    expect("add" in mcFly.actions).toEqual(true);
 
   });
 
