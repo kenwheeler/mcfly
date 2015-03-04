@@ -3,6 +3,7 @@
 jest.dontMock('../McFly');
 jest.dontMock('../Store');
 jest.dontMock('../ActionsFactory');
+jest.dontMock('../Action');
 jest.dontMock('../Dispatcher');
 jest.dontMock('object-assign');
 
@@ -91,6 +92,20 @@ describe('McFly', function() {
   it('should store created ActionsFactory methods in an actions property', function() {
 
     expect("add" in mcFly.actions).toEqual(true);
+
+  });
+
+  pit('should digest the correct payload in the store when it is dispatched', function() {
+
+    var testItem = 'test';
+    return mockActionsFactory.add(testItem)
+      .then(function() {
+        expect(mockStore.getItems()).toEqual([testItem]);
+      }).then(function() {
+        return mockActionsFactory.remove(testItem);
+      }).then(function() {
+        expect(mockStore.getItems()).toEqual([]);
+      });
 
   });
 
