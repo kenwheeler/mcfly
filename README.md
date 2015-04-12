@@ -3,7 +3,7 @@ Flux Architecture Made Easy
 
 *What is McFly?*
 
-When writing ReactJS apps, it is enormously helpful to use Facebook's Flux architecture. It truly complements ReactJS' unidirectional data flow model. Facebook's Flux library provides a Dispatcher, and some examples of how to write Actions and Stores. However, there are no helpers for Action & Store creation, and Stores require 3rd part eventing.
+When writing ReactJS apps, it is enormously helpful to use Facebook's Flux architecture. It truly complements ReactJS' unidirectional data flow model. Facebook's Flux library provides a Dispatcher, and some examples of how to write Actions and Stores. However, there are no helpers for Action & Store creation, and Stores require 3rd party eventing.
 
 McFly is a library that provides all 3 components of Flux architecture, using Facebook's Dispatcher, and providing factories for Actions & Stores.
 
@@ -15,7 +15,7 @@ Check out this JSFiddle Demo to see how McFly can work for you:
 
 ###Dispatcher
 
-McFly uses Facebook Flux's dispatcher. When McFly is instantiated, and a single dispatcher instance is created and can be accessed like shown below:
+McFly uses Facebook Flux's dispatcher. When McFly is instantiated, a single dispatcher instance is created and can be accessed like shown below:
 
 ```javascript
 var mcFly = new McFly();
@@ -28,7 +28,7 @@ In fact, all created Actions & Stores are also stored on the McFly object as `ac
 
 McFly has a **createStore** helper method that creates an instance of a Store. Store instances have been merged with EventEmitter and come with **emitChange**, **addChangeListener** and **removeChangeListener** methods built in.
 
-When a store is created, its methods parameter specified what public methods should be added to the Store object. Every store is automatically registered with the Dispatcher and the `dispatcherID` is stored on the Store object itself, for use in `waitFor` methods.
+When a store is created, its methods parameter specifies what public methods should be added to the Store object. Every store is automatically registered with the Dispatcher and the `dispatcherID` is stored on the Store object itself, for use in `waitFor` methods.
 
 Creating a store with McFly looks like this:
 
@@ -85,7 +85,7 @@ function addTodo(text, someValue) {
  ...
 ```
 
-Stores are also created a with a ReactJS component mixin that adds and removes store listeners that call an **storeDidChange** component method.
+Stores are also created a with a ReactJS component mixin that adds and removes store listeners that call a **storeDidChange** component method.
 
 Adding Store eventing to your component is as easy as:
 
