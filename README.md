@@ -13,6 +13,12 @@ Check out this JSFiddle Demo to see how McFly can work for you:
 
 [http://jsfiddle.net/6rauuetb/](http://jsfiddle.net/6rauuetb/)
 
+###Download
+
+McFly can be downloaded from:
+
+[http://kenwheeler.github.io/mcfly/McFly.js](http://kenwheeler.github.io/mcfly/McFly.js)
+
 ###Dispatcher
 
 McFly uses Facebook Flux's dispatcher. When McFly is instantiated, a single dispatcher instance is created and can be accessed like shown below:
