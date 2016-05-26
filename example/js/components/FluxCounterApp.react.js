@@ -1,8 +1,9 @@
 var React = require('react');
 var CounterStore = require('../stores/CounterStore');
+var FluxCounterActions = require('../actions/FluxCounterActions');
 var FluxCounter = require('./FluxCounter.react');
 
-getState = function() {
+const getState = function() {
   return {
     count: CounterStore.getCount()
   }
@@ -16,14 +17,14 @@ var FluxCounterApp = React.createClass({
     return getState();
   },
 
-  onChange: function() {
+  storeDidChange: function() {
     this.setState(getState());
   },
 
   render: function() {
   	return (
       <div className="flux-counter-app">
-        <FluxCounter count={this.state.count} />
+        <FluxCounter count={this.state.count} onClick={() => FluxCounterActions.countOne()} />
       </div>
   	);
   }

@@ -1,5 +1,5 @@
 var McFly = require('mcfly');
 
-var mcFly = new McFly();
+var mcFly = new McFly(); 
 
 module.exports = mcFly;
