@@ -1,8 +1,8 @@
 'use strict';
 
-var Dispatcher = require('flux').Dispatcher;
+import { Dispatcher }  from 'flux';
 
 /** Creates a singlar instance of Facebook's Dispatcher */
-var AppDispatcher = new Dispatcher();
+const appDispatcher = new Dispatcher();
 
-module.exports = AppDispatcher;
+export default appDispatcher;

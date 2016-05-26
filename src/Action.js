@@ -1,14 +1,15 @@
 'use strict';
-var Dispatcher = require('./Dispatcher');
-var Promise = require('es6-promise').Promise;
+import Dispatcher from './Dispatcher';
+import { Promise } from 'es6-promise';
 
 
 function reThrow(reject, error) {
-  setTimeout(function(){ 
-      if (error && error.stack) {
-          console.error(error.stack);
-      }
-      throw error; }, 0);
+  setTimeout(() => {
+    if (error && error.stack) {
+        console.error(error.stack);
+    }
+    throw error;
+  }, 0);
   return reject();
 }
 
@@ -45,7 +46,7 @@ class Action {
           try {
             Dispatcher.dispatch(payload);
           } catch (error) {
-            reThrow(reject, error); 
+            reThrow(reject, error);
           }
 
           resolve();
@@ -54,4 +55,4 @@ class Action {
   }
 }
 
-module.exports = Action;
+export default Action;

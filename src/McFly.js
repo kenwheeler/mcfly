@@ -1,9 +1,9 @@
 'use strict';
 
-var Dispatcher = require('./Dispatcher');
-var Store = require('./Store');
-var ActionsFactory = require('./ActionsFactory');
-var assign = require('object-assign');
+import Dispatcher from './Dispatcher';
+import Store from './Store';
+import ActionsFactory from './ActionsFactory';
+import assign from 'object-assign';
 
 /**
  * Main McFly Class

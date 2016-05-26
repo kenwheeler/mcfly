@@ -1,8 +1,8 @@
 'use strict';
 
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var iv = require('invariant');
+import { EventEmitter } from 'events';
+import assign from 'object-assign';
+import iv from 'invariant';
 
 /**
  * Store class
@@ -18,15 +18,15 @@ class Store {
    * @constructor
    */
   constructor(methods, callback) {
-    var self = this;
+    const self = this;
     this.callback = callback;
     iv(!methods.callback, '"callback" is a reserved name and cannot be used as a method name.');
     iv(!methods.mixin,'"mixin" is a reserved name and cannot be used as a method name.');
     assign(this, EventEmitter.prototype, methods);
     this.mixin = {
       componentDidMount: function() {
-        var warn,
-          changeFn;
+        let warn;
+        let changeFn;
 
         try {
            warn = (console.warn || console.log).bind(console);
@@ -81,7 +81,6 @@ class Store {
   removeChangeListener(callback) {
     this.removeListener('change', callback);
   }
-
 }
 
-module.exports = Store;
+export default Store;
