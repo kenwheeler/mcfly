@@ -1,4 +1,4 @@
-var McFly = require('mcfly');
+var McFly = require('../../../index.js');
 
 var mcFly = new McFly();
 

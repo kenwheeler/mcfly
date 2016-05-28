@@ -1,12 +1,12 @@
 'use strict';
 
-var Action = require('./Action');
-var assign = require('object-assign');
+import Action from './Action';
+import assign from 'object-assign';
 
 /**
  * ActionsFactory class
  */
-class ActionsFactory {
+export default class ActionsFactory {
 
   /**
    * Constructs an ActionsFactory object and translates actions parameter into
@@ -16,15 +16,13 @@ class ActionsFactory {
    * @constructor
    */
   constructor(actions) {
-    var _actions = {}, a, action;
-    for (a in actions) {
+    const _actions = {};
+    for (let a in actions) {
       if(actions.hasOwnProperty(a)){
-        action = new Action(actions[a]);
+        const action = new Action(actions[a]);
         _actions[a] = action.dispatch.bind(action);
       }
     }
     assign(this, _actions);
   }
 }
-
-module.exports = ActionsFactory;

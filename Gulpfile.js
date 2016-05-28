@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var gReact = require('gulp-react')
+var babel = require('gulp-babel')
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var del = require('del');
@@ -15,9 +15,10 @@ gulp.task('clean', function(cb) {
 
 gulp.task('lib', function() {
   return gulp.src('src/*.js')
-             .pipe(gReact({harmony: true}))
-             .pipe(gulp.dest('lib'));
-
+    .pipe(babel({
+      presets: ['es2015', 'stage-0']
+    }))
+    .pipe(gulp.dest('lib'));
 });
 
 gulp.task('browserify', ['lib'], function() {

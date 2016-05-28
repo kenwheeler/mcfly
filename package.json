@@ -1,6 +1,6 @@
 {
   "name": "mcfly",
-  "version": "0.0.10",
+  "version": "1.0.0",
   "description": "Flux architecture made easy",
   "keywords": [
     "flux",
@@ -21,26 +21,29 @@
   "bugs": "https://github.com/kenwheeler/mcfly/issues",
   "license": "BSD",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "gulp clean && gulp lib"
   },
   "jest": {
     "rootDir": "src",
     "scriptPreprocessor": "../jest-preprocessor.js"
   },
   "dependencies": {
-    "es6-promise": "^2.0.0",
-    "flux": "^2.0.1",
-    "invariant": "^1.0.2",
-    "object-assign": "^1.0.0"
+    "es6-promise": "^3.2.1",
+    "flux": "^2.1.1",
+    "invariant": "^2.2.1",
+    "object-assign": "^4.1.0"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
     "browserify": "^5.9.1",
     "del": "^0.1.2",
-    "gulp": "^3.8.6",
-    "gulp-react": "^0.5.0",
-    "gulp-replace": "^0.4.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-replace": "^0.5.4",
     "jest-cli": "^0.1.18",
-    "react-tools": "^0.12.0",
     "vinyl-source-stream": "^0.1.1"
   }
 }
