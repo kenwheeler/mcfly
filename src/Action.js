@@ -1,16 +1,11 @@
 'use strict';
 import Dispatcher from './Dispatcher';
-import { Promise } from 'es6-promise';
-
 
 function reThrow(reject, error) {
-  setTimeout(() => {
-    if (error && error.stack) {
-        console.error(error.stack);
-    }
-    throw error;
-  }, 0);
-  return reject();
+  if (error && error.stack) {
+    console.error(error.stack);
+  }
+  return reject(error);
 }
 
 /**
@@ -36,12 +31,10 @@ class Action {
    */
   dispatch() {
     return Promise.resolve(this.callback.apply(this, arguments))
-      .then(function(payload){
-        return new Promise(function(resolve, reject){
-          if (!payload) return reject();
-          if (!payload.actionType) return reThrow(reject,
-            "Payload object requires an actionType property"
-          );
+      .then((payload) => {
+        return new Promise((resolve, reject) => {
+          if (!payload) return reThrow(reject, 'Payload needs to be an object');
+          if (!payload.actionType) return reThrow(reject, 'Payload object requires an actionType property');
 
           try {
             Dispatcher.dispatch(payload);

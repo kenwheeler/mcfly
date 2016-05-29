@@ -26,15 +26,32 @@
   },
   "jest": {
     "rootDir": "src",
-    "scriptPreprocessor": "../jest-preprocessor.js"
+    "scriptPreprocessor": "<rootDir>/../node_modules/babel-jest/src/index.js",
+    "unmockedModulePathPatterns": [
+      "node_modules(/|\\\\)object-assign",
+      "node_modules(/|\\\\)flux",
+      "node_modules(/|\\\\)invariant"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "testFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "globals": {
+      "__DEV__": true
+    }
   },
   "dependencies": {
-    "es6-promise": "^3.2.1",
     "flux": "^2.1.1",
     "invariant": "^2.2.1",
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
+    "babel-jest": "^12.1.0",
+    "babel-polyfill": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
@@ -43,7 +60,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-replace": "^0.5.4",
-    "jest-cli": "^0.1.18",
+    "jest-cli": "^12.1.1",
     "vinyl-source-stream": "^0.1.1"
   }
 }

@@ -5,16 +5,14 @@ jest.dontMock('invariant');
 
 describe('Action', function() {
 
-  var Action = require('../Action');
-  var Dispatcher = require('../Dispatcher');
-  var mockAction;
-  var callback;
+  const Action = require('../Action').default;
+  const Dispatcher = require('../Dispatcher').default;
+  let mockAction;
+  let callback;
 
   it('should attach the callback argument to the instance', function() {
 
-    callback = function() {
-      return;
-    };
+    callback = () => false;
 
     mockAction = new Action(callback);
 
@@ -22,24 +20,26 @@ describe('Action', function() {
 
   });
 
-  it('should throw if actionType isn\'t supplied', function(){
+  pit('should reject if actionType isn\'t supplied', async () => {
 
-    callback = function(argument) {
-      return{
-        test: argument
-      };
-    };
+    callback = (argument) => ({ test: argument });
 
     mockAction = new Action(callback);
+    let success = true;
+    let error;
 
-    expect(function() {
-      mockAction.dispatch("test");
-      jest.runAllTimers();
-    }).toThrow();
+    try {
+      success = await mockAction.dispatch('test');
+    } catch (caughtError) {
+      error = caughtError;
+    }
+
+    expect(success).toBe(true);
+    expect(error).toEqual('Payload object requires an actionType property');
 
   });
 
-  it('should not throw if actionType IS supplied', function(){
+  it('should not throw if actionType IS supplied', () => {
 
     callback = function(argument) {
       return{
@@ -57,39 +57,48 @@ describe('Action', function() {
 
   });
 
-  pit('should reject if returns falsy value', function(){
+  pit('should reject if returns falsy value', async () => {
 
     callback = function(argument) {
       return false;
     };
+    mockAction = new Action(callback);
+    let success = true;
+    let error;
 
-    return (new Action(callback)).dispatch("test")["catch"](
-      function(error){
-        expect(error).toBeUndefined();
-      });
+    try {
+      success = await mockAction.dispatch('test');
+    } catch (caughtError) {
+      error = caughtError;
+    }
+
+    expect(success).toBe(true);
+    expect(error).toEqual('Payload needs to be an object');
+  });
+
+  pit('should resolve if actionType IS supplied', async () => {
+
+    callback = (argument) => ({
+      actionType: 'TEST_ACTION',
+      test: argument,
+    });
+    mockAction = new Action(callback);
+    let success = true;
+    let error;
+
+    try {
+      success = await mockAction.dispatch("test");
+    } catch (caughtError) {
+      error = caughtError;
+    }
+
+    expect(success).toBeUndefined();
+    expect(error).toBeUndefined();
 
   });
 
-  pit('should resolve if actionType IS supplied', function(){
-
-    callback = function(argument) {
-      return{
-        actionType: 'TEST_ACTION',
-        test: argument
-      };
-    };
-
-    return (new Action(callback)).dispatch("test").then(
-      function(success){
-        expect(success).toBeUndefined();
-      });
-
-  });
-
-  it('should have dispatched the supplied payload', function(){
-
+  it('should have dispatched the supplied payload', () => {
       expect(Dispatcher.dispatch.mock.calls.length).toEqual(2);
-
   });
 
 });
