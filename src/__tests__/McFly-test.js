@@ -5,107 +5,99 @@ jest.dontMock('../Store');
 jest.dontMock('../ActionsFactory');
 jest.dontMock('../Action');
 jest.dontMock('../Dispatcher');
-jest.dontMock('object-assign');
 
-describe('McFly', function() {
+
+describe('McFly', () => {
 
   var McFly = require('../McFly');
-  var Store = require('../Store');
-  var ActionsFactory = require('../ActionsFactory');
+  var Store = require('../Store').default;
+  var ActionsFactory = require('../ActionsFactory').default;
   var TestConstants = {
     TEST_ADD: 'TEST_ADD',
     TEST_REMOVE: 'TEST_REMOVE'
   };
 
-  var mcFly,mockStore,mockActionsFactory,testItems;
+  var mcFly, mockStore, mockActionsFactory;
+  const testItems = [];
 
-  beforeEach(function() {
+  mcFly = new McFly();
 
-    mcFly = new McFly();
-
-    var items = [];
-    mockStore = mcFly.createStore(
-    {
-      getItems: function() {
-        return items;
-      }
-    }, function(payload) {
-      switch(payload.actionType) {
-        case TestConstants.TEST_ADD:
-          items.push(payload.item);
-        break;
-        case TestConstants.TEST_REMOVE:
-          items.splice(items.indexOf(payload.item), 1);
-        break;
-        default:
-          return true;
-      }
-    });
-
-    mockActionsFactory = mcFly.createActions({
-      add: function(item) {
-        return {
-          actionType: TestConstants.TEST_ADD,
-          item: item
-        }
-      },
-      remove: function(item) {
-        return {
-          actionType: TestConstants.TEST_REMOVE,
-          item: item
-        }
-      }
-    });
-
+  mockStore = mcFly.createStore({
+    getItems: () => testItems,
+  }, function(payload) {
+    switch(payload.actionType) {
+      case TestConstants.TEST_ADD:
+        testItems.push(payload.item);
+      break;
+      case TestConstants.TEST_REMOVE:
+        testItems.splice(testItems.indexOf(payload.item), 1);
+      break;
+      default:
+        return true;
+    }
+    return true;
   });
 
-  it('should instantiate a new dispatcher and attach it to the new instance', function() {
+  mockActionsFactory = mcFly.createActions({
+    add: function(item) {
+      return {
+        actionType: TestConstants.TEST_ADD,
+        item: item
+      }
+    },
+    remove: function(item) {
+      return {
+        actionType: TestConstants.TEST_REMOVE,
+        item: item
+      }
+    }
+  });
+
+  it('should instantiate a new dispatcher and attach it to the new instance', () => {
 
     expect(mcFly.dispatcher).toBeDefined();
 
   });
 
-  it('should create a new Store when createStore is called', function() {
+  it('should create a new Store when createStore is called', () => {
 
     expect(mockStore instanceof Store).toEqual(true);
 
   });
 
-  it('should store created Stores in a stores property', function() {
+  it('should store created Stores in a stores property', () => {
 
     expect(mcFly.stores.indexOf(mockStore) !== -1).toEqual(true);
 
   });
 
-  it('should register created Stores with the Dispatcher and store the token', function() {
+  it('should register created Stores with the Dispatcher and store the token', () => {
 
     expect(mockStore.getDispatchToken()).toMatch(/ID_\d+/);
 
   });
 
-  it('should create a new ActionsFactory when createActions is called', function() {
+  it('should create a new ActionsFactory when createActions is called', () => {
 
     expect(mockActionsFactory instanceof ActionsFactory).toEqual(true);
 
   });
 
-  it('should store created ActionsFactory methods in an actions property', function() {
+  it('should store created ActionsFactory methods in an actions property', () => {
 
     expect("add" in mcFly.actions).toEqual(true);
 
   });
 
-  pit('should digest the correct payload in the store when it is dispatched', function() {
+  pit('should digest the correct payload in the store when it is dispatched', async () => {
 
-    var testItem = 'test';
-    return mockActionsFactory.add(testItem)
-      .then(function() {
-        expect(mockStore.getItems()).toEqual([testItem]);
-      }).then(function() {
-        return mockActionsFactory.remove(testItem);
-      }).then(function() {
-        expect(mockStore.getItems()).toEqual([]);
-      });
+    const testItem = 'test';
+
+    await mockActionsFactory.add(testItem);
+    expect(mockStore.getItems()).toEqual([testItem]);
+
+    await mockActionsFactory.remove(testItem);
+    expect(mockStore.getItems()).toEqual([]);
 
   });
 

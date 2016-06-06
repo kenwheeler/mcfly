@@ -5,36 +5,33 @@ jest.dontMock('../Dispatcher');
 jest.dontMock('object-assign');
 jest.dontMock('invariant');
 
-describe('Store', function() {
+describe('Store', () => {
 
-  var Store = require('../Store');
-  var mockStore;
+  const Store = require('../Store').default;
 
-  mockStore = new Store({
-    testMethod: function(){
-      return true;
-    }
-  },function(payload){
-    switch(payload.actionType) {
+  let mockStore = new Store({
+    testMethod: () => true,
+  }, ({ actionType }) => {
+    switch(actionType) {
       case 'ADD_TEST':
         return true;
       break;
     }
   });
 
-  it('should return a new instance with methods attached via the methods argument', function() {
+  it('should return a new instance with methods attached via the methods argument', () => {
 
     expect(mockStore.testMethod).toBeDefined();
 
   });
 
-  it('should attach the supplied callback to the new instance', function() {
+  it('should attach the supplied callback to the new instance', () => {
 
     expect(mockStore.callback).toBeDefined();
 
   });
 
-  it('should be merged with EventEmitter', function() {
+  it('should be merged with EventEmitter', () => {
 
     expect("on" in mockStore).toEqual(true);
     expect("removeListener" in mockStore).toEqual(true);
@@ -42,22 +39,22 @@ describe('Store', function() {
 
   });
 
-  it('should create a mixin property', function() {
+  it('should create a mixin property', () => {
 
     expect(mockStore.mixin).toBeDefined();
 
   });
 
-  it('should return a dispatcherID when getDispatchToken is called', function() {
+  it('should return a dispatcherID when getDispatchToken is called', () => {
 
     mockStore.dispatcherID = 5;
     expect(mockStore.getDispatchToken()).toEqual(5);
 
   });
 
-  it('should throw if a supplied method is named "callback"', function() {
+  it('should throw if a supplied method is named "callback"', () => {
 
-    expect(function() {
+    expect(() => {
       Store.constructor({
         callback: function(){
           return true;
@@ -67,9 +64,9 @@ describe('Store', function() {
 
   });
 
-  it('should throw if a supplied method is named "mixin"', function() {
+  it('should throw if a supplied method is named "mixin"', () => {
 
-    expect(function() {
+    expect(() => {
       Store.constructor({
         mixin: function(){
           return true;

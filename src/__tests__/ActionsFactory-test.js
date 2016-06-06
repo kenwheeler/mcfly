@@ -4,26 +4,22 @@ jest.dontMock('../ActionsFactory');
 jest.dontMock('../Action');
 jest.dontMock('object-assign');
 
-describe('ActionsFactory', function() {
+describe('ActionsFactory', () => {
 
-  var ActionsFactory = require('../ActionsFactory');
-  var mockActionsFactory;
+  const ActionsFactory = require('../ActionsFactory').default;
+  let mockActionsFactory;
 
-  it('create new Actions and return an object with the supplied method names as callers', function() {
+  it('create new Actions and return an object with the supplied method names as callers', () => {
 
     mockActionsFactory = new ActionsFactory({
-      testMethodA: function(){
-        return {
+      testMethodA: () => ({
           actionType: 'TEST_ACTION_A',
-          data: arguments
-        }
-      },
-      testMethodB: function(){
-        return {
-          actionType: 'TEST_ACTION_B',
-          data: arguments
-        }
-      }
+          data: arguments,
+      }),
+      testMethodB: () => ({
+        actionType: 'TEST_ACTION_B',
+        data: arguments
+      }),
     });
 
     expect(mockActionsFactory.testMethodA).toBeDefined();
