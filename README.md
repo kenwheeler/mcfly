@@ -1,4 +1,4 @@
-#McFly
+# McFly
 Flux Architecture Made Easy
 
 *What is McFly?*
@@ -7,19 +7,19 @@ When writing ReactJS apps, it is enormously helpful to use Facebook's Flux archi
 
 McFly is a library that provides all 3 components of Flux architecture, using Facebook's Dispatcher, and providing factories for Actions & Stores.
 
-###Demo
+### Demo
 
 Check out this JSFiddle Demo to see how McFly can work for you:
 
 [http://jsfiddle.net/6rauuetb/](http://jsfiddle.net/6rauuetb/)
 
-###Download
+### Download
 
 McFly can be downloaded from:
 
 [http://kenwheeler.github.io/mcfly/McFly.js](http://kenwheeler.github.io/mcfly/McFly.js)
 
-###Dispatcher
+### Dispatcher
 
 McFly uses Facebook Flux's dispatcher. When McFly is instantiated, a single dispatcher instance is created and can be accessed like shown below:
 
@@ -30,7 +30,7 @@ return mcFly.dispatcher;
 ```
 In fact, all created Actions & Stores are also stored on the McFly object as `actions` and `stores` respectively.
 
-###Stores
+### Stores
 
 McFly has a **createStore** helper method that creates an instance of a Store. Store instances have been merged with EventEmitter and come with **emitChange**, **addChangeListener** and **removeChangeListener** methods built in.
 
@@ -104,7 +104,7 @@ var TodoApp = React.createClass({
 
   ...
 ```
-###Actions
+### Actions
 
 McFly's **createActions** method creates an Action Creator object with the supplied singleton object. The supplied methods are inserted into a Dispatcher.dispatch call and returned with their original name, so that when you call these methods, the dispatch takes place automatically.
 
@@ -131,7 +131,7 @@ http://jsfiddle.net/thekenwheeler/32hgqsxt/
 
 ## API
 
-###McFly
+### McFly
 
 ```javascript
 var McFly = require('mcfly');
